@@ -88,13 +88,9 @@ namespace BetterQuestObjectivesPatcher
                         return baseTexts.Contains(o.DisplayText?.String?.ToLower()) ||
                         Equals(o.DisplayText?.String?.ToLower(), bqoObjective.DisplayText?.String?.ToLower());
                     });
-                    /* find closest objective in winner to current objective in BQO by index
-                       reason: in case mod author changes index, example: AYOP - Companions
-                       hopefully this doesn't cause problematic patches if a mod author adds other quest objectives with ambiguous descriptions
-                       ideal solution is matchingObjectives.FirstOrDefault(o => o.Index == bqoObjective.Index) to get exact match with a continue for null case
-                       the same logic may be needed for stages below, but currently there are no known cases */
-                    if (!matchingObjectives.Any()) continue;
-                    var winningObjective = matchingObjectives.Aggregate((closest, next) => Math.Abs(next.Index - bqoObjective.Index) < Math.Abs(closest.Index - bqoObjective.Index) ? next : closest);
+                    // find objective with index that matches BQO
+                    var winningObjective = matchingObjectives.FirstOrDefault(s => s.Index == bqoObjective.Index);
+                    if (winningObjective == null) continue;
                     // skip if winner identical to BQO
                     if (Equals(bqoObjective.DisplayText, winningObjective.DisplayText)) continue;
 
