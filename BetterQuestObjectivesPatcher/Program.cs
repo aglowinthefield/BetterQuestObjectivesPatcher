@@ -18,7 +18,8 @@ namespace BetterQuestObjectivesPatcher
             "Dawnguard.esm",
             "HearthFires.esm",
             "Dragonborn.esm",
-            "unofficial skyrim special edition patch.esp" // Requiem has this as a master
+            "unofficial skyrim special edition patch.esp", // Requiem has this as a master
+            "Unofficial Skyrim Special Edition Patch.esp" // in case using old version of ussep with capitals in filename
         };
 
         public static async Task<int> Main(string[] args)
